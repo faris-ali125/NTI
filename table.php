@@ -11,28 +11,46 @@ $users = [
     (object)[
         'id' => 1,
         'name' => 'ahmed',
-        "gender" => 'm',
-        'hobbies' => 'football'.','.'swimming'.','. 'running',
-        'activities' => 'drawing'.','.'painting',
-        'email' =>'as@hh'
+        "gender" => (object)[
+            'gender' => 'm'
+        ],
+        'hobbies' => [
+            'football', 'swimming', 'running'
+        ],
+        'activities' => [
+            "school" => 'drawing',
+            'home' => 'painting'
+        ],
+        
     ],
     (object)[
         'id' => 2,
         'name' => 'mohamed',
-        "gender" =>'m', 
-        'hobbies' => 'swimming'.','. 'running',
-        'activities' =>'drawing'.','.'painting',
-    'email' =>'as@hh'
+        "gender" => (object)[
+            'gender' => 'm'
+        ],
+        'hobbies' => [
+            'swimming', 'running',
+        ],
+        'activities' => [
+            "school" => 'painting',
+            'home' => 'drawing'
+        ]
     ],
     (object)[
         'id' => 3,
         'name' => 'menna',
-        "gender" =>'f', 
-        'hobbies' => 'running',
-        'activities' => 'drawing'.','.'painting',
-            'email' =>''
+        "gender" => (object)[
+            'gender' => 'f'
+        ],
+        'hobbies' => [
+            'running',
+        ],
+        'activities' => [
+            "school" => 'painting',
+            'home' => 'drawing'
+        ]
     ],
-    
     
 ];
 
@@ -49,33 +67,42 @@ $users = [
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   </head>
   <body>
-    <table class="container">
-        <thead class="row-14 alert alert-success">
-            <?php
-            foreach($users[0] as $key=>$value ){?>
-                <th><?php echo $key?></th>
-    
-          <?php }?>
-        </thead>
+    <table class="table">
+        <thead>
+          <?php
 
-        <tbody class="col-14 alert alert-danger">
-        
-            <?php
-            for($i=0;$i<=array_key_last($users);$i++){
-              echo' <tr>' ;
-                foreach($users[$i] as $key=>$value){?>
-                   
-                    <td><?php echo$value ?></td>
-                    
-              <?php }?>
-               
-                <tr>
-                <?php }?> 
+          foreach($users[0] as $property=>$value){?>
+
+                <th><?=$property?></th>
+        <?php } ?>
                 
+        </thead>
+        <tbody>
+          <?php
+          foreach($users as $p=>$k){?>
+            <tr>
+              <?php
+              foreach($k as $property=>$value){ ?>
+                <td><?php
+                if(gettype($value)=='array'|| gettype($value)=='object' ){
+                       foreach($value as $n=>$v){
+                       
+                          if($property=='gender'){
+                              if($v=='m'){
+                                   $v= 'male';
+                              }elseif($v=='f')
+                              {$v='female';}
+                              
+                          }
+                          echo"$v".',';
+                       }
+                }else{echo($value);}
               
-          
-           
-           
+                ?></td>
+
+            <?php  }?> 
+            </tr>
+          <?php }?>
         </tbody>
     </table>
     <!-- Optional JavaScript -->
