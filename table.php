@@ -22,6 +22,7 @@ $users = [
             'home' => 'painting'
         ],
         
+        
     ],
     (object)[
         'id' => 2,
@@ -35,7 +36,8 @@ $users = [
         'activities' => [
             "school" => 'painting',
             'home' => 'drawing'
-        ]
+        ],
+       
     ],
     (object)[
         'id' => 3,
@@ -49,7 +51,8 @@ $users = [
         'activities' => [
             "school" => 'painting',
             'home' => 'drawing'
-        ]
+        ],
+        
     ],
     
 ];
@@ -70,10 +73,11 @@ $users = [
     <table class="table">
         <thead>
           <?php
-
-          foreach($users[0] as $property=>$value){?>
+           if(count($users)>0){
+            foreach($users[count($users) - 1] as $property=>$value){?>
 
                 <th><?=$property?></th>
+         <?php } ?>
         <?php } ?>
                 
         </thead>
